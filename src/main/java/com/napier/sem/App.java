@@ -9,7 +9,7 @@ public class App
 {
     public static void main(String[] args)
     {
-        System.out.println("Initiating Week 2");
+        System.out.println("Initiating Week 2: Sunday");
 
         // Connect
         // Connect to MongoDB on local system - we're using port 27000, start container with -p27000:27017
