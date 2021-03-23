@@ -22,6 +22,9 @@ public class App
         // Test the size of the returned data - should be 240124
         System.out.println(employees.size());
 
+        // Get a department
+        // a.getDepartment("Sales");
+
         // Disconnect from database
         a.disconnect();
     }
@@ -125,6 +128,40 @@ public class App
         }
     }
 
+    public Department getDepartment(String dept_name)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT dept_no, dept_name"
+                            + "FROM departments "
+                            + "WHERE dept_name = " + dept_name;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Department dep = new Department();
+                dep.dept_no = rset.getInt("dept_no");
+                dep.dept_name = rset.getString("dept_name");
+                return dep;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get department details");
+            return null;
+        }
+    }
+
+
     public void displayEmployee(Employee emp)
     {
         if (emp != null)
@@ -223,6 +260,10 @@ public class App
             return null;
         }
     }
+
+
+
+
 
     /**
      * Prints a list of employees.
